@@ -400,5 +400,5 @@ void solve()
     if (isSnitch(s) && s != "0")
         print(s);
     else
-        print("-1");
+        pm;
 }
