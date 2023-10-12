@@ -337,47 +337,59 @@ signed main()
     cin >> t;
     for (int i = 1; i <= t; i++)
     {
-        // eprintf("--- Case #%lld start ---\n", i);
-        // eprintf("Case #%lld: ", i);
-        // solve();
-        // eprintf("--- Case #%lld end ---\n", i);
-        // eprintf("time = %.5lf\n", getCurrentTime());
-        // eprintf("++++++++++++++++++++\n");
-
+        eprintf("--- Case #%lld start ---\n", i);
+        eprintf("Case #%lld: ", i);
         solve();
+        eprintf("--- Case #%lld end ---\n", i);
+        eprintf("time = %.5lf\n", getCurrentTime());
+        eprintf("++++++++++++++++++++\n");
+
+        // solve();
     }
 
     return 0;
 }
 //-----------------------------------------End Snippet----------------------------------------
+bool isSnitch(string s)
+{
+    int sum = 0;
+    fo(i, s.size())
+    {
+        sum += s[i] - '0';
+    }
+    return sum % 2 == 0 && s.size() != 0;
+}
 
 void solve()
 {
+    int n;
+    cin >> n;
     string s;
     cin >> s;
-    vector<char> v;
-   // vi freq(26, 0);
-    set<char> v2;
-    fo(i, s.size())
+
+    while ((s[s.size() - 1] - '0') % 2 == 0)
     {
-        v.pb(s[i]);
-       // freq[v[i] - 'a']++;
-    }
-    v.pb('#');
-    fo(i, s.size())
-    {
-        if (v[i] == v[i + 1])
+        s.pop_back();
+        if (s.size() == 0)
         {
-            i++;
-            continue;
+            pm;
+            return;
         }
-        else
-            v2.insert(v[i]);
     }
-    //sort(all(v2));
-    for (auto i = v2.begin(); i != v2.end(); i++)
+
+    if (!isSnitch(s))
     {
-        cout << *i;
+        for (int i = s.size() - 2; i >= 0; i--)
+        {
+            if (s[i] % 2 == 1)
+            {
+                s = s.substr(0, i) + s.substr(i + 1);
+                break;
+            }
+        }
     }
-    cout << nl;
+    if (isSnitch(s) && s != "0")
+        print(s);
+    else
+         pm;
 }
