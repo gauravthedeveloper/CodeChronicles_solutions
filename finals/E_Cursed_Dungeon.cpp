@@ -356,12 +356,12 @@ void solve()
     string s;
     cin >> s;
     vector<char> v;
-    vi freq(26, 0);
+   // vi freq(26, 0);
     set<char> v2;
     fo(i, s.size())
     {
         v.pb(s[i]);
-        freq[v[i] - 'a']++;
+       // freq[v[i] - 'a']++;
     }
     v.pb('#');
     fo(i, s.size())
